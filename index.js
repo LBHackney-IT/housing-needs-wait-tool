@@ -1,28 +1,34 @@
-const serverless = require('serverless-http');
-const express = require('express');
-const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+const api = require('lambda-api')();
 
-const app = express();
 const {
   dataFuncs,
   fetchHousingRegisterData,
   templates
 } = require('./lib/Dependencies');
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/static'));
+api.get('/css/:filename', async (req, res) => {
+  res.sendFile(req.params.filename, {
+    root: 'static/css/'
+  });
+});
 
-app.get('/start', async (req, res) => {
+api.get('/img/:filename', async (req, res) => {
+  res.sendFile(req.params.filename, {
+    root: 'static/img/'
+  });
+});
+
+api.get('/start', async (req, res) => {
   const token = jwt.sign({ valid: true }, process.env.jwtsecret);
   const html = templates.indexTemplate({
     title: 'this is the index',
     token
   });
-  res.send(html);
+  res.html(html);
 });
 
-app.post('/results', async (req, res) => {
+api.post('/results', async (req, res) => {
   const token = jwt.verify(req.body.token, process.env.jwtsecret);
   if (!token || !token.valid) {
     res.sendStatus(401);
@@ -37,9 +43,11 @@ app.post('/results', async (req, res) => {
     isShort: waitTimeData.message === 'around 12 months',
     yourApplicationData: dataFuncs.getYourApplicationData(data, dataFuncs.bands)
   });
-  res.send(html);
+  res.html(html);
 });
 
 module.exports = {
-  handler: serverless(app)
+  handler: async (event, context) => {
+    return await api.run(event, context);
+  }
 };
