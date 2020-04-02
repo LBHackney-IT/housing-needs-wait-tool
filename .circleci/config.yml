@@ -11,7 +11,7 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
+            - v1-dependencies-{{ checksum "package-lock.json" }}
             - v1-dependencies-
 
       - run:
@@ -20,15 +20,10 @@ jobs:
             sudo npm i -g serverless
             npm install
 
-      - run:
-          name: Set AWS credentials
-          command: |
-            serverless config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} --profile hackney
-
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
 
       # run tests!
       - run:
@@ -37,4 +32,4 @@ jobs:
 
       - run:
           name: Deploy application
-          command: sls deploy
+          command: sls deploy -s production

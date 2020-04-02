@@ -6,6 +6,7 @@
   "scripts": {
     "start": "sls offline start -s dev",
     "debug": "export SLS_DEBUG=* && node --inspect ./node_modules/serverless/bin/serverless offline -s dev",
+    "deploy": "sls deploy --aws-profile hackney --stage production",
     "test": "jest",
     "lint": "eslint --fix --ext js lib && echo 'Lint complete.'"
   },
