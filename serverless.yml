@@ -18,6 +18,17 @@ plugins:
   - serverless-offline-ssm
 
 functions:
+  root:
+    handler: root.handler
+    package:
+      exclude:
+        - '**'
+      include:
+        - root.js
+    events:
+      - http:
+          path: /
+          method: GET
   app:
     role: arn:aws:iam::775052747630:role/LBH_Lambda_Execution
     handler: index.handler

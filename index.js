@@ -13,7 +13,7 @@ const {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/static'));
 
-app.get('/', async (req, res) => {
+app.get('/start', async (req, res) => {
   const token = jwt.sign({ valid: true }, process.env.jwtsecret);
   const html = templates.indexTemplate({
     title: 'this is the index',
