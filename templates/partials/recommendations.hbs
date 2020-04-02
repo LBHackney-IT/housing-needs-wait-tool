@@ -1,0 +1,40 @@
+<div class='recommendations'>
+  <section class='lbh-page-announcement'>
+    <h2 class='lbh-page-announcement__title'>
+      {{#if isShort}}
+        Our recommendation: Learn how to bid effectively
+      {{else}}
+        Our recommendation: Look at other solutions
+      {{/if}}
+    </h2>
+    <div class='lbh-page-announcement__content'>
+      <p>
+        {{#if isShort}}
+          To put yourself in the best position to receive a housing offer, it's important to know how to bid for
+          properties effectively.
+        {{else}}
+          To help you find settled accommodation as soon as possible, we can support you in finding a home in the
+          private rented sector or through other social housing schemes.
+        {{/if}}
+      </p>
+    </div>
+    <details class='govuk-details lbh-details' data-module='govuk-details'>
+      <summary class='govuk-details__summary2 govuk-button lbh-button'>
+        {{#if isShort}}
+          Tips for bidding
+        {{else}}
+          View options
+        {{/if}}
+      </summary>
+      <div class='govuk-details__text'>
+        <span class='govuk-details__summary-text2'>
+          {{#if isShort}}
+            {{> shortTerm }}
+          {{else}}
+            {{> longTerm }}
+          {{/if}}
+        </span>
+      </div>
+    </details>
+  </section>
+</div>

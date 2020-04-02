@@ -1,0 +1,48 @@
+<div class='why-is-this'>
+  <div class='row'>
+    <div class='column'>
+      <h2> Why is this?</h2>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='column'>
+      <div class='highlight'>
+        <div class='highlight-header'>
+          <div class='highlight-image'>
+            <img src='img/application.svg' alt='application' />
+          </div>
+          {{data.housingRegisterCount}}
+        </div>
+        <div class='highlight-text'>
+          Households are waiting for social housing in Hackney
+        </div>
+      </div>
+    </div>
+    <div class='column'>
+      <div class='highlight'>
+        <div class='highlight-header'>
+          <div class='highlight-image'>
+            <img src='img/family.svg' alt='family' />
+          </div>
+          {{data.aheadOfYou}}
+        </div>
+        <div class='highlight-text'>
+          People with a higher priority waiting for a {{data.bedrooms }} bedroom property
+        </div>
+      </div>
+    </div>
+    <div class='column'>
+      <div class='highlight'>
+        <div class='highlight-header'>
+          <div class='highlight-image'>
+            <img src='img/apartment.svg' alt='apartment' />
+          </div>
+          {{data.propertyCount}}
+        </div>
+        <div class='highlight-text'>
+          {{data.bedrooms }} bedroom properties became available in the last 12 months
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

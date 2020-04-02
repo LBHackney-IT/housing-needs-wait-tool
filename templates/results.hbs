@@ -1,0 +1,64 @@
+{{> header title=title }}
+<div class="row">
+  <div class="column">
+    <h1>
+      Housing Register waiting status
+    </h1>
+  </div>
+</div>
+<div class='row'>
+  <div class='column'>
+    <div class='warning-wrapper'>
+      <div class='govuk-warning-text lbh-warning-text'>
+        <div class='govuk-warning-text__text'>
+          <span class='govuk-warning-text__assistive'>
+            Warning
+          </span>
+          If you require an adapted property or if you are over the age of 55 your estimated waiting time may
+          not be
+          accurate.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='row'>
+  <div class='column'>
+    {{> waitTime data=waitTimeData }}
+  </div>
+</div>
+<div class='row'>
+  <div class='column'>
+    {{> whyIsThis data=whyIsThisData }}
+  </div>
+</div>
+<div class='row'>
+  <div class='column'>
+    {{> progressBar data=progressBarData }}
+  </div>
+</div>
+<div class='row'>
+  <div class='column'>
+    {{> recommendations isShort=isShort }}
+  </div>
+</div>
+<div class='row'>
+  <div class='column'>
+    {{> yourApplication data=yourApplicationData }}
+  </div>
+  <div class='column'>
+    <div>
+      <h3>
+        How accurate is this information?
+      </h3>
+      <p>
+        This information provides an estimation of when you may be likely to be in a position to be offered
+        housing,
+        based on data from the last 30 days. New applications who have a higher housing need will take
+        priority, and
+        so your wait time may increase or decrease next month.
+      </p>
+    </div>
+  </div>
+</div>
+{{> footer }}

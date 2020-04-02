@@ -1,0 +1,38 @@
+service: hn-wait-tool
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-2
+  stage: ${opt:stage, 'dev'}
+  profile: hackney
+  timeout: 15
+  vpc:
+    securityGroupIds:
+      - sg-022acccbebd7bca46
+    subnetIds:
+      - subnet-00356e0650138f74f
+      - subnet-0a7f442c22a6feedc
+
+plugins:
+  - serverless-offline
+  - serverless-offline-ssm
+
+functions:
+  app:
+    role: arn:aws:iam::775052747630:role/LBH_Lambda_Execution
+    handler: index.handler
+    package:
+      exclude:
+        - '**'
+      include:
+        - index.js
+        - lib/**
+        - node_modules/**
+    events:
+      - http:
+          path: '{proxy+}'
+          method: ANY
+    environment:
+      UHT_DB: ${ssm:/hn-single-view-api/production/UHT_DB}
+      jwtsecret: ${ssm:/common/hackney-jwt-secret}

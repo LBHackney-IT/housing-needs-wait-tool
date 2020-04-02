@@ -1,0 +1,46 @@
+<table class='govuk-table lbh-table'>
+  <tbody class='govuk-table__body'>
+    <tr class='govuk-table__row'>
+      <th class='govuk-table__header'>
+        Bidding number:
+      </th>
+      <td class='govuk-table__cell'>
+        {{data.biddingNumber}}
+      </td>
+    </tr>
+    <tr class='govuk-table__row'>
+      <th class='govuk-table__header'>
+        Your priority band:
+      </th>
+      <td class='govuk-table__cell'>
+        <strong>
+          {{data.band}}
+        </strong>
+      </td>
+    </tr>
+    <tr class='govuk-table__row'>
+      <th class='govuk-table__header'>
+        Requirements:
+      </th>
+      <td class='govuk-table__cell'>
+        {{data.bedrooms}} bedroom
+      </td>
+    </tr>
+    <tr class='govuk-table__row'>
+      <th class='govuk-table__header'>
+        Position:
+      </th>
+      <td class='govuk-table__cell'>
+        {{data.overallPosition}} out of {{data.totalCount}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<div>
+  <p>
+    <a href='https://hackney.gov.uk/housing-coc'>
+      My circumstances have changed (External Link)
+    </a>
+  </p>
+</div>

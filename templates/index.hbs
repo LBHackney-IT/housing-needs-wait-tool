@@ -1,0 +1,46 @@
+{{> header title=title }}
+<div class="row">
+  <div class="column">
+    <h1>
+      Housing Register waiting status
+    </h1>
+  </div>
+</div>
+<section class="lbh-page-announcement">
+  <h2 class="lbh-page-announcement__title">
+    Use this tool to:
+  </h2>
+  <div class="lbh-page-announcement__content">
+    <ul>
+      <li>
+        Find your current position on the register
+      </li>
+      <li>
+        Estimate your wait time
+      </li>
+      <li>
+        View recommended housing solutions
+      </li>
+    </ul>
+  </div>
+</section>
+<form action="/results" method="POST">
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="biddingNumber">
+      Bidding Number
+    </label>
+    <input class="govuk-input" type="text" name="biddingNumber" id="biddingNumber" />
+  </div>
+  <div class="govuk-form-group">
+    <input type="hidden" name="token" value="{{token}}" />
+    <button class="govuk-button lbh-button">
+      Search
+    </button>
+  </div>
+  <div class="govuk-form-group govuk-hint lbh-hint">
+    Don't know your bidding number? Email us at <a
+      href="mailto:Housing.register@hackney.gov.uk">Housing.register@hackney.gov.uk</a> or call the Housing Register
+    duty line on 020 8356 4412
+  </div>
+</form>
+{{> footer }}
