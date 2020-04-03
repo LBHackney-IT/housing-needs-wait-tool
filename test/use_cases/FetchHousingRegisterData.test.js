@@ -51,14 +51,15 @@ describe('FetchHousingRegisterData', function() {
 
     expect(uhtGatewaySpy.fetchCustomerData).toHaveBeenCalledTimes(1);
 
-    expect(response.customerData).not.toBeNull();
+    expect(response.customerData).toBeDefined();
   });
 
   it('can not return customer data when given a invalid bidding number', async function() {
     const response = await fetchHousingRegisterData('invalid');
 
-    expect(uhtGatewaySpy.fetchCustomerData).toHaveBeenCalledTimes(1);
+    expect(uhtGatewaySpy.fetchCustomer).toHaveBeenCalledTimes(1);
+    expect(uhtGatewaySpy.fetchCustomerData).toHaveBeenCalledTimes(0);
 
-    expect(response.customerData).toBeNull();
+    expect(response).not.toBeDefined();
   });
 });

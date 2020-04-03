@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const api = require('lambda-api')();
 
 const {
+  checkDob,
   dataFuncs,
   fetchHousingRegisterData,
   templates
@@ -22,7 +23,7 @@ api.get('/img/:filename', async (req, res) => {
 api.get('/start', async (req, res) => {
   const token = jwt.sign({ valid: true }, process.env.jwtsecret);
   const html = templates.indexTemplate({
-    title: 'this is the index',
+    title: 'Housing Register Wait Time Search',
     token
   });
   res.html(html);
@@ -31,17 +32,38 @@ api.get('/start', async (req, res) => {
 api.post('/results', async (req, res) => {
   const token = jwt.verify(req.body.token, process.env.jwtsecret);
   if (!token || !token.valid) {
-    res.sendStatus(401);
+    return res.sendStatus(401);
   }
-  const data = await fetchHousingRegisterData(req.body.biddingNumber);
-  const waitTimeData = dataFuncs.getWaitTimeData(data);
-  const html = templates.resultsTemplate({
-    title: 'this is the results',
-    waitTimeData,
-    whyIsThisData: dataFuncs.getWhyIsThisData(data),
-    progressBarData: dataFuncs.getProgressBarData(data),
-    isShort: waitTimeData.message === 'around 12 months',
-    yourApplicationData: dataFuncs.getYourApplicationData(data, dataFuncs.bands)
+
+  const dobValid = await checkDob(
+    req.body.biddingNumber,
+    `${req.body.day}/${req.body.month}/${req.body.year}`
+  );
+  if (dobValid) {
+    const data = await fetchHousingRegisterData(req.body.biddingNumber);
+    if (data) {
+      const waitTimeData = dataFuncs.getWaitTimeData(data);
+      const html = templates.resultsTemplate({
+        title: 'Housing Register Wait Time Results',
+        waitTimeData,
+        whyIsThisData: dataFuncs.getWhyIsThisData(data),
+        progressBarData: dataFuncs.getProgressBarData(data),
+        isShort: waitTimeData.message === 'around 12 months',
+        yourApplicationData: dataFuncs.getYourApplicationData(
+          data,
+          dataFuncs.bands
+        )
+      });
+      return res.html(html);
+    }
+  }
+
+  res.redirect('/notfound');
+});
+
+api.get('/notfound', async (req, res) => {
+  const html = templates.notfoundTemplate({
+    title: 'Housing Register Wait Time'
   });
   res.html(html);
 });
