@@ -6,6 +6,9 @@ provider:
   region: eu-west-2
   stage: ${opt:stage}
   timeout: 15
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
   vpc:
     securityGroupIds:
       - sg-022acccbebd7bca46
@@ -24,23 +27,27 @@ functions:
     handler: root.handler
     package:
       exclude:
-        - '**'
+        - './**'
       include:
         - root.js
     events:
       - http:
           path: /
           method: GET
+    environment:
+      stage: ${self:provider.stage}
   app:
     name: hn-wait-tool-app-${self:provider.stage}
     role: arn:aws:iam::775052747630:role/LBH_Lambda_Execution
     handler: index.handler
+    timeout: 60
     package:
       exclude:
-        - '**'
+        - './**'
       include:
         - index.js
         - lib/**
+        - static/**
         - node_modules/**
     events:
       - http:
