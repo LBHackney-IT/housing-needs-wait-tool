@@ -17,6 +17,7 @@
     "handlebars": "^4.7.4",
     "jsonwebtoken": "^8.5.1",
     "lambda-api": "^0.10.5",
+    "moment": "^2.24.0",
     "mssql": "^5.1.1"
   },
   "devDependencies": {
