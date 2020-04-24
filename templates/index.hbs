@@ -22,25 +22,30 @@
     <label class="govuk-label" for="biddingNumber">
       Bidding Number
     </label>
-    <input class="govuk-input lbh-input" type="number" name="biddingNumber" id="biddingNumber" required />
+    <input class="govuk-input lbh-input" type="number" name="biddingNumber" id="biddingNumber" required
+      oninvalid="this.setCustomValidity('Bidding number is required')" oninput="this.setCustomValidity('')" />
   </div>
   <div class="govuk-form-group dob">
-    <span class="govuk-label">Date of Birth</span>
-    <label class="govuk-label" for="day">
-      Day
-    </label>
-    <input class="govuk-input lbh-input govuk-input--width-2" type="number" id="day" name="day" pattern="[0-9]*"
-      placeholder="01" required />
-    <label class="govuk-label" for="month">
-      Month
-    </label>
-    <input class="govuk-input lbh-input govuk-input--width-2" type="number" id="month" name="month" pattern="[0-9]*"
-      placeholder="01" required />
-    <label class="govuk-label" for="year">
-      Year
-    </label>
-    <input class="govuk-input lbh-input govuk-input--width-4" type="number" id="year" name="year" type="number"
-      placeholder="1970" pattern="[0-9]*" required />
+    <fieldset>
+      <legend>
+        <span class="govuk-label">Date of Birth (DD/MM/YYYY)</span>
+      </legend>
+      <label class="govuk-label" for="day">
+        Day
+      </label>
+      <input class="govuk-input lbh-input" type="number" id="day" name="day" pattern="[0-9]*" required
+        oninvalid="this.setCustomValidity('Date of birth day is required')" oninput="this.setCustomValidity('')" />
+      <label class="govuk-label" for="month">
+        Month
+      </label>
+      <input class="govuk-input lbh-input" type="number" id="month" name="month" pattern="[0-9]*" required
+        oninvalid="this.setCustomValidity('Date of birth month is required')" oninput="this.setCustomValidity('')" />
+      <label class="govuk-label" for="year">
+        Year
+      </label>
+      <input class="govuk-input lbh-input" type="number" id="year" name="year" type="number" pattern="[0-9]*" required
+        oninvalid="this.setCustomValidity('Date of birth year is required')" oninput="this.setCustomValidity('')" />
+    </fieldset>
   </div>
   <div class="govuk-form-group">
     <input type="hidden" name="token" value="{{token}}" />

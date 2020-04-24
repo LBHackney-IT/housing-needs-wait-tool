@@ -1,25 +1,25 @@
 <div class='progress'>
   <div class='progress-image'>
-    <img src='img/application.svg' alt='application' />
+    <img src='img/application.svg' alt='' />
     <p>
       Application
     </p>
   </div>
   <div class='progress-bar-wrapper'>
+    <div class='progress-bar-text'>
+      <strong>
+        Your position:
+      </strong>
+      <p>
+        {{data.overallPosition}} out of {{data.totalCount}}
+      </p>
+    </div>
     <div class='progress-bar'></div>
     <div class='progress-bar__position' style="margin-left: {{data.progress}}%">
-      <div>
-        <strong>
-          Your position:
-        </strong>
-        <p>
-          {{data.overallPosition}} out of {{data.totalCount}}
-        </p>
-      </div>
     </div>
   </div>
   <div class='progress-image'>
-    <img src='img/apartment.svg' alt='apartment' />
+    <img src='img/apartment.svg' alt='' />
     <p>
       Housing Offer
     </p>
