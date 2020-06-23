@@ -30,7 +30,8 @@ api.get('/start', async (req, res) => {
   const token = jwt.sign({ valid: true }, process.env.jwtsecret);
   const html = templates.indexTemplate({
     title: 'Housing Register Wait Time Search',
-    token
+    token,
+    cookieOptIn: req.cookies['cookie_opt_in'] === true
   });
   res.html(html);
 });

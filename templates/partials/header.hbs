@@ -14,10 +14,44 @@
   <link rel="shortcut icon" href="img/favicon.png" type="image/png" />
   <script type="text/javascript" src="js/lbh-frontend-2.0.0.min.js"></script>
   <script type="text/javascript" src="js/details.polyfill.js"></script>
+  {{#if cookieOptIn}}
+  <script type="text/javascript">(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-T7V6KZ4');</script>
+  {{/if}}
   <title>{{title}} | Hackney Council</title>
 </head>
 
 <body class="govuk-template__body">
+  {{#if cookieOptIn}}
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7V6KZ4" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  {{/if}}
+  {{#unless cookieOptIn}}
+  <section class="lbh-cookie-banner" data-module="lbh-cookie-banner">
+    <div class="lbh-container">
+      <div class="govuk-grid-row">
+        <div class="lbh-cookie-banner__content govuk-grid-column-two-thirds-from-desktop">
+          We use cookies to ensure you have the best experience. For full details see our <a
+            href="https://hackney.gov.uk/privacy">privacy statement</a>.
+        </div>
+        <div class="lbh-cookie-banner__button-wrapper govuk-grid-column-one-third-from-desktop">
+          <button class="govuk-button lbh-button lbh-button--secondary lbh-cookie-banner__button"
+            data-behavior="lbh-cookie-close">
+            Accept and close
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{/unless}}
   <header class="lbh-header">
     <div class="lbh-header__main">
       <div class="lbh-container lbh-header__wrapper">
