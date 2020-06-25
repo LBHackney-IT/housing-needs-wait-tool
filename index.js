@@ -8,6 +8,8 @@ const {
   templates
 } = require('./lib/Dependencies');
 
+const hasOptInCookie = ({ cookies }) => cookies['cookie_opt_in'] === true;
+
 api.get('/css/:filename', async (req, res) => {
   res.sendFile(req.params.filename, {
     root: 'static/css/'
@@ -30,8 +32,8 @@ api.get('/start', async (req, res) => {
   const token = jwt.sign({ valid: true }, process.env.jwtsecret);
   const html = templates.indexTemplate({
     title: 'Housing Register Wait Time Search',
-    token,
-    cookieOptIn: req.cookies['cookie_opt_in'] === true
+    cookieOptIn: hasOptInCookie(req),
+    token
   });
   res.html(html);
 });
@@ -52,6 +54,7 @@ api.post('/results', async (req, res) => {
       const waitTimeData = dataFuncs.getWaitTimeData(data);
       const html = templates.resultsTemplate({
         title: 'Housing Register Wait Time Results',
+        cookieOptIn: hasOptInCookie(req),
         waitTimeData,
         whyIsThisData: dataFuncs.getWhyIsThisData(data),
         progressBarData: dataFuncs.getProgressBarData(data),
@@ -70,7 +73,8 @@ api.post('/results', async (req, res) => {
 
 api.get('/notfound', async (req, res) => {
   const html = templates.notfoundTemplate({
-    title: 'Housing Register Wait Time'
+    title: 'Housing Register Wait Time',
+    cookieOptIn: hasOptInCookie(req)
   });
   res.html(html);
 });
