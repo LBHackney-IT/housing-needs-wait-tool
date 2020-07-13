@@ -1,6 +1,4 @@
-SELECT
-  member.dob
+SELECT wlmember.dob
 FROM wlapp
-  JOIN contacts ON wlapp.con_key = contacts.con_key
-  JOIN member ON contacts.con_ref = member.house_ref
+  JOIN wlmember ON wlapp.app_ref = wlmember.app_ref
 WHERE u_novalet_ref = @biddingNumber
